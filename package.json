@@ -30,7 +30,7 @@
     "CONTRIBUTING.md",
     "THIRD_PARTY_NOTICES.md",
     "LICENSE",
-    "docs/screenshots/*.png"
+    "docs/screenshots/*.jpg"
   ],
   "repository": {
     "type": "git",

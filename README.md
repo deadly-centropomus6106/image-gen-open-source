@@ -11,9 +11,9 @@
   <p><a href="#quick-start">Quick start</a> · <a href="#how-it-works">How it works</a> · <a href="#models-and-controls">Models</a> · <a href="docs/USAGE.md">Full guide</a> · <a href="CONTRIBUTING.md">Contributing</a></p>
 </div>
 
-![Image Studio workspace with a sample architectural brief, three selected models, and comparison controls](docs/screenshots/workspace.png)
+![Image Studio live gallery filled with generated architectural images, model labels, and the floating composer](docs/screenshots/workspace.jpg)
 
-*The actual app on a fresh install. The example selects two images each across three models: six images from one shared plan. No private gallery, credentials, or generated results are shown.*
+*Image Studio in everyday use: generated architectural variations, model labels, and a floating composer for the next idea.*
 
 Image Studio brings your prompt, references, model settings, queue, and image library into one local browser app. Use it to explore a visual direction, make variations from a reference, or compare how different models interpret the same brief.
 
@@ -68,9 +68,9 @@ Only configure providers you want to use. Paste keys into the app, then click **
 <details>
 <summary><strong>See Preferences and key setup</strong></summary>
 
-![Image Studio Preferences showing concurrency and an empty OpenAI API-key form](docs/screenshots/preferences.png)
+![Preferences in the live workspace, showing concurrency controls and a saved-key status without revealing the key](docs/screenshots/preferences.jpg)
 
-Google's key form is below the OpenAI form in the same panel. Neither key is included in this repository or screenshot.
+Google's key form is below the OpenAI form in the same panel. A saved key is shown only as a status; its value is never displayed.
 
 </details>
 
@@ -111,6 +111,10 @@ flowchart TD
 
 **Review and iterate.** Open a card to inspect the image and its details. Retry a failed attempt, download an original or export, reuse an image as a reference, or choose **Load original batch** to continue from the same request. Loading a batch does not automatically submit it.
 
+![A generated architectural image opened alongside its original reference, request, and Load original batch action](docs/screenshots/image-details.jpg)
+
+*Open an image to revisit the original reference and request, then load the batch back into the composer to keep exploring.*
+
 The browser receives live queue updates from the local Node.js server. The server handles provider requests, key storage, image processing, and history.
 
 ## Models and controls
@@ -149,7 +153,7 @@ Image Studio runs at `127.0.0.1`. It is a local personal tool, not a hosted serv
 | Planning inputs | Sent to OpenAI through Codex. |
 | Image-generation inputs | Sent to the selected provider, with that provider's own credentials. |
 
-Key files are **not encrypted**. The server returns whether a key is configured without returning its value to the browser. This repository excludes saved keys, account credentials, personal prompts, and image history. The documentation screenshots use an empty session and an example prompt.
+Key files are **not encrypted**. The server returns whether a key is configured without returning its value to the browser. This repository excludes saved keys, account credentials, and runtime history. The documentation screenshots show selected images and requests from the maintainer's live workspace; the underlying gallery files and credentials are not distributed.
 
 Keep the app on localhost. If you choose a custom data directory, keep it outside anything you intend to publish. `.gitignore` does not protect a folder that you zip directly after using it; share a clean checkout or a GitHub source download.
 
