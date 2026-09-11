@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101112">
+  <title>Image Studio</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+  <script type="module" src="/app.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Image Studio home"><svg viewBox="0 0 28 28" aria-hidden="true"><rect x="3" y="3" width="16" height="16" rx="5"/><rect x="9" y="9" width="16" height="16" rx="5"/></svg><span>Image studio<span class="local-label">LOCAL</span></span></a>
+    <div class="top-actions">
+      <button id="spend-button" class="spend-button" title="View estimated API spending">API this month · $0.00</button>
+      <button id="connection-button" class="connection"><span class="status-dot"></span><span id="connection-text">Connecting…</span><span class="connection-arrow">↗</span></button>
+      <button id="settings-toggle" class="icon-button" title="Settings" aria-label="Open settings" aria-expanded="false" data-icon="settings"></button>
+    </div>
+  </header>
+  <main>
+    <div class="library-bar">
+      <div class="library-title"><h1>Library</h1><span id="total-count">0</span><span class="divider"></span><div class="filters" role="group" aria-label="Filter images"><button class="active" data-filter="all">All images</button><button data-filter="active">In progress <span id="active-count"></span></button></div></div>
+      <label class="density" title="Grid size"><span data-icon="grid"></span><input id="density" type="range" min="2" max="6" value="4" aria-label="Number of grid columns"></label>
+    </div>
+    <div id="connection-notice" class="notice" hidden></div>
+    <section id="gallery" class="gallery" aria-label="Generated images"></section>
+    <section id="empty" class="empty-state">
+      <div class="empty-mark"><span data-icon="image"></span><span class="empty-spark" data-icon="spark"></span></div>
+      <h2>A little space for your big ideas.</h2>
+      <p>Drop in your images, tell us what to change.<br>Or start with just a prompt.</p>
+      <button id="empty-upload" class="text-button">Add reference images <span>↗</span></button>
+    </section>
+    <div id="no-results" class="no-results" hidden>No images generating right now.</div>
+  </main>
+  <div id="drop-overlay" class="drop-overlay" hidden><span data-icon="upload"></span><strong>Drop your references here</strong><span>Tell us what to create and how many images you want</span></div>
+  <div class="composer-dock">
+    <div id="batch-progress" class="batch-progress" hidden><span class="small-spinner"></span><span id="batch-progress-text"></span></div>
+    <form id="composer" class="composer">
+      <div id="attachments" class="attachments" hidden></div>
+      <div class="prompt-row"><textarea id="prompt" rows="2" maxlength="10000" placeholder="Describe an image, or drop references and tell us what to change…" aria-label="Image prompt"></textarea></div>
+      <div class="composer-bottom">
+        <div class="composer-tools">
+          <button id="upload-button" type="button" class="tool-button upload-button" title="Add reference images" aria-label="Add reference images" data-icon="image-plus"></button>
+          <div id="model-options" class="model-options" role="group" aria-label="Image models — select one or more"></div>
+          <span class="tool-separator"></span>
+          <label class="select-tool"><span data-icon="ratio"></span><select id="aspect" aria-label="Aspect ratio"><option value="auto">Auto ratio</option><option value="1:1">1:1</option><option value="16:10">16:10</option><option value="16:9">16:9</option><option value="9:16">9:16</option><option value="4:3">4:3</option><option value="3:2">3:2</option><option value="2:3">2:3</option></select><span class="chevron">⌄</span></label>
+          <label class="select-tool" title="4K exports use a 4096 px long edge. Original model output is also saved."><span data-icon="size"></span><select id="resolution" aria-label="Export resolution"><option value="auto">Original size</option><option value="2k">2K</option><option value="4k">4K</option></select><span class="chevron">⌄</span></label>
+          <label id="quality-control" class="select-tool" hidden><select id="quality" aria-label="OpenAI output quality"><option value="low">Low quality</option><option value="medium">Medium quality</option><option value="high" selected>High quality</option><option value="xhigh">Extra high quality</option><option value="max">Max quality</option><option value="auto">Auto quality</option></select><span class="chevron">⌄</span></label>
+          <label id="thinking-control" class="select-tool" hidden><select id="thinking" aria-label="Google thinking effort"><option value="minimal">Minimal thinking</option><option value="high">High thinking</option></select><span class="chevron">⌄</span></label>
+          <label id="background-control" class="select-tool" hidden><select id="background" aria-label="OpenAI background"><option value="auto">Auto background</option><option value="opaque">Opaque background</option><option value="transparent">Transparent background</option></select><span class="chevron">⌄</span></label>
+          <label id="count-control" class="select-tool count-control" title="Images per selected model. Your prompt can override this count. Every model receives the same concepts and references."><span data-icon="layers"></span><select id="count" aria-label="Number of images for each selected model"><option value="0">Auto count</option><option value="1">1 image each</option><option value="2">2 images each</option><option value="3">3 images each</option><option value="4">4 images each</option><option value="5">5 images each</option><option value="6">6 images each</option><option value="7">7 images each</option><option value="8">8 images each</option><option value="9">9 images each</option><option value="10">10 images each</option><option value="11">11 images each</option><option value="12">12 images each</option><option value="13">13 images each</option><option value="14">14 images each</option><option value="15">15 images each</option><option value="16">16 images each</option><option value="17">17 images each</option><option value="18">18 images each</option><option value="19">19 images each</option><option value="20">20 images each</option></select><span class="chevron">⌄</span></label>
+        </div>
+        <button id="generate" class="generate-button" type="submit" title="Generate · ⌘ Enter"><span id="generate-text">Generate</span><span data-icon="arrow-up"></span></button>
+      </div>
+      <div class="generation-quote"><div><div id="generation-cost" class="generation-cost" role="status"></div><div id="key-needed" class="key-needed" hidden></div></div></div>
+    </form>
+  </div>
+  <input id="file-input" type="file" accept="image/png,image/jpeg,image/webp,image/avif,image/gif,image/tiff" multiple hidden>
+  <aside id="settings" class="settings-panel" hidden>
+    <div class="panel-heading"><h2>Preferences</h2><button id="settings-close" class="icon-button" aria-label="Close settings" data-icon="close"></button></div>
+    <label for="concurrency">Generate at the same time</label><select id="concurrency"><option value="1">1 image</option><option value="2">2 images</option><option value="3">3 images</option><option value="4">4 images</option></select>
+    <p>The rest wait in your queue. Codex plans the batch through your subscription. Each selected model creates every planned image. For example, 2 images × 3 models creates 6 images.</p>
+    <div class="settings-note"><strong>OpenAI API key · GPT Image 2.5</strong>
+      <p id="openai-key-status">Add a key to use GPT Image 2.5.</p>
+      <form id="openai-key-form" class="key-form">
+        <input id="openai-key" type="password" placeholder="Paste your OpenAI API key" aria-label="OpenAI API key" autocomplete="off" spellcheck="false" autocapitalize="none" autocorrect="off" required>
+        <p id="openai-key-error" class="key-note" role="alert" hidden></p>
+        <div class="key-actions"><button id="save-openai-key" type="submit" class="secondary-button">Save key locally</button><button id="remove-openai-key" type="button" class="secondary-button" hidden>Remove</button></div>
+      </form>
+      <p><a href="https://platform.openai.com/api-keys" target="_blank" rel="noreferrer">Create an OpenAI key ↗</a> · <a href="https://platform.openai.com/settings/organization/billing/overview" target="_blank" rel="noreferrer">Set up API billing</a></p>
+      <p class="key-note">Use a key directly from OpenAI for standard pricing without intermediary fees. API billing is separate from ChatGPT. Stored only on this computer with user-only file permissions; saving a key makes no paid request.</p>
+    </div>
+    <div class="settings-note"><strong>Google AI Studio API key · Nano Banana</strong>
+      <p id="gemini-key-status">Add a key to use Nano Banana. Google bills these images separately.</p>
+      <form id="gemini-key-form" class="key-form">
+        <input id="gemini-key" type="password" placeholder="Paste the full Google key (AQ.… supported)" aria-label="Google AI Studio API key" autocomplete="off" spellcheck="false" autocapitalize="none" autocorrect="off" required>
+        <p id="gemini-key-error" class="key-note" role="alert" hidden></p>
+        <div class="key-actions"><button id="save-gemini-key" type="submit" class="secondary-button">Save key locally</button><button id="remove-gemini-key" type="button" class="secondary-button" hidden>Remove</button></div>
+      </form>
+      <p class="key-note">Stored on this computer with access limited to your user. Accepts Google’s newer AQ. authorization keys. The key is sent only to Google for generation; saving it makes no paid request and does not verify account access.</p>
+    </div>
+    <div id="spending-panel" class="settings-note"><strong>API spending · estimated USD</strong>
+      <div class="spending-totals"><div><span>This month</span><b id="month-spend">$0.00</b></div><div><span>All time</span><b id="total-spend">$0.00</b></div></div>
+      <p id="provider-totals"></p>
+      <p id="spending-status">This app’s requests only. Includes returned input, image, and thinking usage. Provider billing is the final source of truth; credits, tax, and usage elsewhere are excluded.</p>
+      <div id="spending-history" class="spending-history"></div>
+      <p><a href="https://platform.openai.com/usage" target="_blank" rel="noreferrer">OpenAI usage</a> · <a href="https://developers.openai.com/api/docs/pricing#image-generation" target="_blank" rel="noreferrer">OpenAI prices</a> · <a href="https://ai.google.dev/gemini-api/docs/pricing" target="_blank" rel="noreferrer">Google prices</a> · <a href="https://aistudio.google.com/usage" target="_blank" rel="noreferrer">Google usage &amp; billing</a></p>
+    </div>
+    <div class="settings-note"><strong>Codex image model &amp; quality</strong><p>The bundled Codex CLI requests GPT Image 2 and sets quality and native size automatically. This route uses your subscription allowance. Choose a paid GPT Image 2.5 model for explicit API quality controls.</p></div>
+    <div class="settings-note"><strong>Size and quality by model</strong><p>GPT Image 2.5: Low through Max quality, or Auto. The 4K selection is capped to a non-experimental canvas: at most 2560 pixels on either edge and 3.69 megapixels total. The composer shows the actual requested dimensions. Auto quality shows a price range.</p><p>Nano Banana: native 1K, 2K, or 4K. Nano Banana 2 offers Minimal or High thinking; Pro manages thinking automatically. Thinking is billed separately from image output. Both use automatic image quality.</p><p>Paid API images retain native pixels. Google ratios such as 16:10 are cropped from the nearest supported canvas; the original is saved. Codex 2K/4K exports use a 2048/4096-pixel long edge and can involve a local resize.</p></div>
+    <button id="reconnect" class="secondary-button">Reconnect Codex</button>
+  </aside>
+  <dialog id="detail-dialog" class="detail-dialog">
+    <div class="detail-layout"><div id="detail-image" class="detail-image"></div><aside class="detail-info"><div class="panel-heading"><span id="detail-status" class="eyebrow">Image details</span><button id="detail-close" class="icon-button" aria-label="Close image" data-icon="close"></button></div><div id="detail-content"></div></aside></div>
+  </dialog>
+  <dialog id="reference-dialog" class="reference-dialog" aria-labelledby="reference-preview-title" aria-describedby="reference-preview-meta">
+    <div class="reference-preview-layout">
+      <header class="reference-preview-header"><div><h2 id="reference-preview-title">Reference image</h2><p id="reference-preview-meta">Original reference</p></div><button id="reference-preview-close" class="icon-button" type="button" aria-label="Close reference preview" data-icon="close" autofocus></button></header>
+      <div class="reference-preview-canvas"><img id="reference-preview-image" alt="Full-size reference image" draggable="false"></div>
+      <footer class="reference-preview-actions"><a id="reference-original-link" class="secondary-button" target="_blank" rel="noreferrer">Open original ↗</a><a id="reference-download" class="secondary-button" download>Download reference</a><button id="reference-add-to-chat" class="secondary-button reference-primary" type="button"><span data-icon="image-plus"></span> Add to chat</button></footer>
+    </div>
+  </dialog>
+  <div id="toast" class="toast" role="status" hidden></div>
+</body>
+</html>

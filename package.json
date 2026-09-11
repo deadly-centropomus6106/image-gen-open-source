@@ -1,0 +1,51 @@
+{
+  "name": "image-gen",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs",
+    "dev": "node --watch server.mjs",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@openai/codex": "0.153.4",
+    "sharp": "^0.34.3"
+  },
+  "description": "A local workspace for generating, editing, and comparing AI images with your own accounts and API keys.",
+  "license": "MIT",
+  "files": [
+    "server.mjs",
+    "lib/*.mjs",
+    "public/*.js",
+    "public/*.css",
+    "public/*.html",
+    "public/*.svg",
+    "test/*.test.mjs",
+    "docs/*.md",
+    "Start Image Studio.command",
+    "CONTRIBUTING.md",
+    "THIRD_PARTY_NOTICES.md",
+    "LICENSE",
+    "docs/screenshots/*.png"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/koppkvn/image-gen-open-source.git"
+  },
+  "homepage": "https://github.com/koppkvn/image-gen-open-source#readme",
+  "bugs": {
+    "url": "https://github.com/koppkvn/image-gen-open-source/issues"
+  },
+  "keywords": [
+    "image-generation",
+    "openai",
+    "gemini",
+    "codex",
+    "local-first",
+    "image-comparison"
+  ]
+}

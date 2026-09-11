@@ -1,0 +1,36 @@
+# Local keys, image library, prompts, and history
+.data/
+
+# Credentials and local configuration
+.env
+.env.*
+!.env.example
+!.env.*.example
+.npmrc
+*-key.json
+*-key.json.*
+credentials.json
+credentials*.json
+service-account*.json
+auth.json
+auth.json.*
+*.pem
+*.key
+.codex/
+
+# Dependencies, output, logs, and caches
+node_modules/
+coverage/
+.cache/
+*.log
+*.tgz
+*.zip
+
+# Editor and OS files
+.DS_Store
+._*
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
